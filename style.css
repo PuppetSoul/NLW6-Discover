@@ -33,6 +33,9 @@ img {
   --text-color: hsl(0 0% 46%);
   --text-color-light: hsl(0 0% 98%);
   --body-color: hsl(0 0% 98%);
+
+  /* fonts */
+  --title-font-size: 1.875rem;
 }
 
 /* Base */
@@ -48,7 +51,7 @@ body {
 }
 
 .title {
-  font: 700 1.875rem 'Poppins', sans-serif;
+  font: 700 var(--title-font-size) 'Poppins', sans-serif;
   color: var(--title-color);
   -webkit-font-smoothing: auto;
 }
@@ -100,6 +103,10 @@ main {
 
 .logo span {
   color: var(--base-color);
+}
+
+.logo-alt span {
+  color: var(--body-color);
 }
 
 .section {
@@ -450,3 +457,81 @@ nav.show div.icon-close {
   margin-right: 0.625rem;
   color: var(--base-color);
 }
+
+/* FOOTER */
+footer {
+  background: var(--base-color);
+}
+
+footer .logo {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+footer .brand p {
+  color: var(--text-color-light);
+  margin-bottom: 0.75rem;
+}
+
+footer i {
+  font-size: 1.5rem;
+  color: var(--text-color-light);
+}
+
+footer .social a {
+  display: inline-block;
+  margin-right: 2rem;
+
+  transition: 0.3s;
+}
+
+footer .social a:hover {
+  transform: translateY(-0.5rem);
+}
+
+/* BACK-TO-TOP */
+
+.back-to-top {
+  background: var(--base-color);
+  color: var(--text-color-light);
+  font-size: 1.5rem;
+  line-height: 0;
+
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+
+  padding: 1rem;
+  clip-path: circle();
+
+  visibility: hidden;
+  opacity: 0;
+
+  transition: 0.2s;
+  transform: translateY(200%);
+}
+
+.back-to-top.show {
+  visibility: visible;
+  opacity: 1;
+
+  transform: translateY(0%);
+}
+
+/* Responsivo */
+/* Extra large devices: > 1200px */
+@media (min-width: 1200px) {
+}
+
+/* Large devices: > 1023px */
+@media (min-width: 1023px) {
+}
+
+/* Large devices: > 992px */
+@media (min-width: 992px) {
+  :root {
+    --title-font-size: 2.2rem;
+  }
+}
+
+/* Medium devices: > 767px */
