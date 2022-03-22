@@ -18,10 +18,10 @@ for (const link of links) {
 }
 
 /* Interagindo com o Scroll, alterando o Header */
-function changeHeaderWhenScroll() {
-  const header = document.querySelector('#header') // Recupera o ID Header
-  const navHeight = header.offsetHeight // Pega a altura da navegação
+const header = document.querySelector('#header') // Recupera o ID Header
+const navHeight = header.offsetHeight // Pega a altura da navegação
 
+function changeHeaderWhenScroll() {
   if (window.scrollY >= navHeight) {
     // Scroll maior que a altura do Header
     header.classList.add('scroll')
@@ -38,7 +38,13 @@ const swiper = new Swiper('.swiper', {
     el: '.swiper-pagination'
   },
   //mousewheel: true,
-  keyboard: true
+  keyboard: true,
+  breakpoints: {
+    767: {
+      slidesPerView: 2,
+      setWrapperSize: true
+    }
+  }
 })
 
 /* Scroll Reveal - Show elements within the scroll on page */
@@ -61,9 +67,9 @@ scrollReveal.reveal(
 )
 
 /* Controle do item BACK-TO-TOP */
-function backToTop() {
-  const backToTopButton = document.querySelector('.back-to-top')
+const backToTopButton = document.querySelector('.back-to-top')
 
+function backToTop() {
   if (window.scrollY >= 560) {
     backToTopButton.classList.add('show')
   } else {
@@ -71,8 +77,34 @@ function backToTop() {
   }
 }
 
+/* Active menu on window scroll */
+const sections = document.querySelectorAll('main section[id]')
+
+function activateMenuAtCurrentSection() {
+  const checkpoint = window.pageYOffset + (window.innerHeight / 8) * 4
+
+  for (const section of sections) {
+    const sectionTop = section.offsetTop
+    const sectionHeight = section.offsetHeight
+    const sectionId = section.getAttribute('id')
+    const checkpointStart = checkpoint >= sectionTop
+    const checkpointEnd = checkpoint <= sectionTop + sectionHeight
+
+    if (checkpointStart && checkpointEnd) {
+      document
+        .querySelector('nav ul li a[href*=' + sectionId + ']')
+        .classList.add('active')
+    } else {
+      document
+        .querySelector('nav ul li a[href*=' + sectionId + ']')
+        .classList.remove('active')
+    }
+  }
+}
+
 /* Adding listeners to window scroll */
 window.addEventListener('scroll', function () {
   changeHeaderWhenScroll()
   backToTop()
+  activateMenuAtCurrentSection()
 })
